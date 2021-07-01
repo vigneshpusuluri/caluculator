@@ -51,7 +51,7 @@ pipeline {
                     agent any
                     //This environment block defines two variables which will be used later in the 'Deliver' stage.
                     environment {
-                        VOLUME = '$(pwd)/sources:/src'
+                        VOLUME = '$(pwd)/'
                         IMAGE = 'cdrx/pyinstaller-linux:python2'
                     }
                     steps {
@@ -74,7 +74,7 @@ pipeline {
                         success {
                             //This archiveArtifacts step archives the standalone executable file and exposes this file
                             //through the Jenkins interface.
-                            archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals"
+                            archiveArtifacts "${env.BUILD_ID}/sources/dist/calcy"
                             sh "docker run --rm -v ${VOLUME} ${IMAGE} 'rm -rf build dist'"
                         }
                     }
