@@ -1,5 +1,4 @@
 import unittest
-from unittest import result
 from calcy import Calcy
 
 class cal_test(unittest.TestCase):
