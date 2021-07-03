@@ -1,3 +1,3 @@
 # caluculator
 sample for the  jenkins 
-a python caluculator
+a python caluculatr
