@@ -1,4 +1,4 @@
 # caluculator
 sample for the  jenkins 
-a python caluculatr
+a python caluculator
 
