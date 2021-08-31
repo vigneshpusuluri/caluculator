@@ -23,6 +23,8 @@ pipeline {
                 //This stash step saves the Python source code and compiled byte code files from the sources
                 //workspace directory for use in later stages.
                 stash(name: 'compiled-results', includes: '*.py*')
+                               sh """aws configure set region us-east-1"""
+
                 sh 'pip install --user aws-sam-cli'
             }
         }
