@@ -61,7 +61,7 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-                            sh""" sudo python3.7 -m pip install aws-sam-cli"""
+                            sh""" python3.7 -m pip install aws-sam-cli"""
                             sh """sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
                                 sh """sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
                         
