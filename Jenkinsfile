@@ -54,10 +54,8 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-        
-                             sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'  
-                            sh 'sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml'
-                                sh 'sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM'
+                            bat """sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
+                                sh """sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
                         
                     }
                    
