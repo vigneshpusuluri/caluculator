@@ -1,13 +1,34 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
-Description: 'Calculator App Lambda function.'
-Resources:
-    calcu:
-        Type: 'AWS::Serverless::Function'
-        Properties:
-            Handler: Calculator.lambda_handler
-            Runtime: python3.8
-            CodeUri: ./calcy.py
-            Description: AWS LAMBDA of Calculator-app
-            Timeout: 10
-            Role: arn:aws:iam::467409941327:role/s3-acess
+Transform: AWS::Serverless-2016-10-31
+
+Resources:  
+   ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: '/'
+      Policies:
+      - PolicyName: Lambda-execution-role
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action: '*'
+            Resource: '*'      
+   calculator:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: Calculator.lambda_handler
+      Runtime: python3.8
+      CodeUri: s3://vignesh-cicd/b1d1d618881b967ff2cf885e4621ed46
+      Description: AWS LAMBDA of Calculator-app
+      Timeout: 10
+      Role: !GetAtt ExecutionRole.Arn
