@@ -10,7 +10,8 @@ pipeline {
         stage('Install sam-cli') {
             agent any
       steps {
-        sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
+        sh  """aws configure set region us-east-1"""
+
       }
         }
         stage('Build') {
