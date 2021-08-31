@@ -62,7 +62,7 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-                            sh """venv/bin/sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
+                            sh """venv/bin/sam package --template-file cloudformationlambda.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
                                 sh """venv/bin/sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
                         
                     }
