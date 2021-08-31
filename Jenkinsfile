@@ -23,6 +23,7 @@ pipeline {
                 //This stash step saves the Python source code and compiled byte code files from the sources
                 //workspace directory for use in later stages.
                 stash(name: 'compiled-results', includes: '*.py*')
+                sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
             }
         }
         stage('Test') {
@@ -54,7 +55,7 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-                            sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
+                            
                             sh """sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
                                 sh """sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
                         
