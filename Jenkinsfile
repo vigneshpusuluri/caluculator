@@ -11,6 +11,7 @@ pipeline {
             agent any
       steps {
         sh  """aws configure set region us-east-1"""
+          sh 'python3.7 -m venv venv && venv/bin/pip install aws-sam-cli'
 
       }
         }
@@ -61,7 +62,6 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-                            sh""" python3.7 -m pip install aws-sam-cli"""
                             sh """sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
                                 sh """sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
                         
