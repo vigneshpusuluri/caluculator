@@ -54,10 +54,10 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-                        withAWS(credentials: 'aws-id', region: 'us-east-1'){
+        
                                sh 'sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml'
                                 sh 'sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM'
-                        }
+                        
                     }
                    
                   
