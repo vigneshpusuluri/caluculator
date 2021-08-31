@@ -54,9 +54,9 @@ pipeline {
         stage('Deliver') {
                     agent any
                     steps {
-                            bat """aws configure set region us-east-1"""
-                            bat """sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
-                                bat """sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
+                            sh """aws configure set region us-east-1"""
+                            sh """sam package --template-file cft.yaml --s3-bucket vignesh-cicd --output-template-file packaged-lambda.yaml"""
+                                sh """sam deploy --template-file packaged-lambda.yaml --stack-name myjenkins --capabilities CAPABILITY_IAM"""
                         
                     }
                    
