@@ -23,7 +23,7 @@ pipeline {
                 //This stash step saves the Python source code and compiled byte code files from the sources
                 //workspace directory for use in later stages.
                 stash(name: 'compiled-results', includes: '*.py*')
-                sh 'python -m venv venv && venv/bin/pip install aws-sam-cli'
+                sh 'pip install aws-sam-cli'
             }
         }
         stage('Test') {
