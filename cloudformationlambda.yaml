@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'Calculator App Lambda function.'
+Resources:
+    calcu:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            Handler: Calculator.lambda_handler
+            Runtime: python3.8
+            CodeUri: ./calcu/Calculator.py
+            Description: AWS LAMBDA of Calculator-app
+            Timeout: 10
+            Role: arn:aws:iam::467409941327:role/s3-acess
